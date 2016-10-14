@@ -1,0 +1,57 @@
+git 命令
+
+1、git init
+Initialized empty Git repository in /Users/michael/learngit/.git/
+瞬间Git就把仓库建好了，而且告诉你是一个空的仓库（empty Git repository），细心的读者可以发现当前目录下多了一个.git的目录，这个目录是Git来跟踪管理版本库的，没事千万不要手动修改这个目录里面的文件，不然改乱了，就把Git仓库给破坏了。
+如果你没有看到.git目录，那是因为这个目录默认是隐藏的，用ls -ah命令就可以看见。
+2、$ git add readme.txt   
+用命令git add告诉Git，把文件添加到仓库
+，可反复多次使用，添加多个文件后执行commit统一提交
+你可以简单理解为，需要提交的文件修改通通放到暂存区，然后，一次性提交暂存区的所有修改。
+git add命令实际上就是把要提交的所有修改放到暂存区（Stage），然后，执行git commit就可以一次性把暂存区的所有修改提交到分支。
+3、$ git commit -m "wrote a readme file"
+用命令git commit告诉Git，把文件提交到仓库
+4、git status命令可以让我们时刻掌握仓库当前的状态，上面的命令告诉我们，readme.txt被修改过了，但还没有准备提交的修改。
+5、git diff   test1.txt顾名思义就是查看difference，用于查看文件test1.txt修改后add操作前的内容变化
+git diff HEAD -- test1.txt  用于查看文件test1.txt待commit前的修改内容，即含add后的修改
+6、git log命令显示从最近到最远的提交日志
+git log --pretty=oneline  可以按行展示提交日志记录信息
+7、git reset --hard HEAD^    当前git库回退至上一版本
+用HEAD表示当前版本，也就是最新的提交版本，上一个版本就是HEAD^，上上一个版本就是HEAD^^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100。
+
+用命令git reset HEAD file可以把暂存区的修改撤销掉（unstage），重新放回工作区;
+git reset命令既可以回退版本，也可以把暂存区的修改回退到工作区。当我们用HEAD时，表示最新的版本。
+
+8、git reset --hard 933e49f   定位回到未来的某个版本，933e49f为git log --pretty=oneline 查看版本时候的版本号一般为SHA1串的前几位？？
+9、git reflog用来记录你的每一次命令及对应操作的版本号，如下第一列为每次操作版本对应的commit id 可用于定位回到指定版本
+933e49f HEAD@{0}: reset: moving to 933e49f
+915a2d5 HEAD@{1}: reset: moving to HEAD^
+933e49f HEAD@{2}: commit: test1 add test
+915a2d5 HEAD@{3}: commit: test1 add hah
+b937e60 HEAD@{4}: commit: test 2 floor
+3f63b7e HEAD@{5}: commit: test more file
+7dd9a7e HEAD@{6}: commit (initial): 学习git使用
+
+10、git checkout -- file可以丢弃工作区的修改：
+$ git status
+# On branch master
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#       modified:   readme.txt
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+
+status含#       modified:   readme.txt   工作区修改的文件可以通过git checkout -- file撤销全部修改，但是checkout无法撤销已添加（add）至缓存区的修改
+即一种是readme.txt自工作区修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
+一种是readme.txt已经添加到暂存区后，在工作区又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
+11、rm test2.txt 删除工作区文件，此时git status可以查看文件状态为#       deleted:    test2.txt 
+现在你有两个选择，一是确实要从版本库中删除该文件，那就用命令git rm test2.txt 删掉，并且git commit：
+另一种情况是删错了，因为版本库里还有呢，所以可以很轻松地把误删的文件恢复到最新版本：
+$ git checkout -- test2.txt
+
+git checkout其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。
+12、
+https://github.com/gxn2013/git_learn.git
+master分支用于最后使用，master以外分支用于测试，测试通过以后可以提交至master分支继续作为基线
