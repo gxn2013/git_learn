@@ -1,6 +1,9 @@
 learn git test 
-update by master
+<<<<<<< HEAD
 add dev
+=======
+update by dev
+>>>>>>> dev
 test
 haha:
 test commit
