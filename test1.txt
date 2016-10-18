@@ -1,6 +1,5 @@
 learn git test 
 merge by fast forward
-add dev
 update by dev manerge
 test
 haha:
