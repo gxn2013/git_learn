@@ -1,5 +1,3 @@
-learn git test 
-merge confilct
 merge by fast forward
 update by dev manerge
 test commit
