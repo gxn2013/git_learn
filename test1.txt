@@ -1,6 +1,4 @@
 learn git test 
 merge by fast forward
 update by dev manerge
-test
-haha:
 test commit
