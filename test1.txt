@@ -1,5 +1,6 @@
 learn git test 
 updit by other
+merge confilct
 merge by fast forward
 update by dev manerge
 test commit
