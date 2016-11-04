@@ -2,4 +2,4 @@ test3
 t13
 update by master 3
 t2
-t3
+push&pull
